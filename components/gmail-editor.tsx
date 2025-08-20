@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { GmailEmail } from "./gmail-email"
 import { ImageCropper } from "./image-cropper"
+import { ExportPopup } from "./export-popup"
 import { Button } from "@/components/ui/button"
 import { useGmailStore } from "@/lib/gmail-store"
 import { Trash2 } from "lucide-react"
@@ -13,6 +14,7 @@ export function GmailEditor() {
   const [isExporting, setIsExporting] = useState(false)
   const [cropperOpen, setCropperOpen] = useState(false)
   const [tempImageSrc, setTempImageSrc] = useState("")
+  const [showExportPopup, setShowExportPopup] = useState(false)
 
   const handleProfilePictureUpload = (file: File) => {
     const reader = new FileReader()
@@ -58,6 +60,8 @@ export function GmailEditor() {
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
+
+      setShowExportPopup(true)
     } catch (error) {
       console.error("Export failed:", error)
     } finally {
@@ -87,6 +91,8 @@ export function GmailEditor() {
         imageSrc={tempImageSrc}
         onCropComplete={handleCropComplete}
       />
+
+      <ExportPopup isOpen={showExportPopup} onClose={() => setShowExportPopup(false)} />
     </div>
   )
 }
