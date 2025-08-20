@@ -12,7 +12,7 @@ function validateEmail(email: string) {
 function joinWaitlist(email: string, params: { ref?: string }) {
   return new Promise<string>((resolve, reject) => {
     // Using placeholder API URL - replace with actual Adsone API endpoint
-    fetch(`/api/v1/waitlist`, {
+    fetch(`https://waitlist.adsone.app/api/v1/waitlist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
