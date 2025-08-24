@@ -190,7 +190,16 @@ export function GmailEmail({
             onClick={handleAvatarClick}
           >
             <Avatar className="w-10 h-10">
-              <AvatarImage src={profilePicture || "/placeholder.svg"} alt={senderName} />
+              <AvatarImage 
+                src={profilePicture || "/placeholder.svg"} 
+                alt={senderName}
+                className="object-cover"
+                onError={(e) => {
+                  // If the image fails to load, hide it to show the fallback
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
               <AvatarFallback>{getInitials(senderName)}</AvatarFallback>
             </Avatar>
             {isHoveringAvatar && (

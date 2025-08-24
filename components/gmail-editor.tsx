@@ -83,7 +83,15 @@ export function GmailEditor() {
         </Button>
       </div>
       <div className="flex items-center justify-center mt-4 mb-8 gap-2">
-        <span className="font-semibold">By</span> <AdsOneLogo className="h-8" />
+        <span className="font-semibold">By</span> 
+        <a 
+          href="https://adsone.app" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hover:opacity-80 transition-opacity duration-200"
+        >
+          <AdsOneLogo className="h-8" />
+        </a>
       </div>
 
       <div ref={gmailPreviewRef}>
