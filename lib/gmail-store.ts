@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
-interface GmailConfig {
+export interface GmailConfig {
   time: string
   battery: string
   subject: string

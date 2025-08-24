@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import type { GmailConfig } from "@/lib/gmail-store"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -27,7 +28,7 @@ interface GmailEmailProps {
   senderEmail?: string
   profilePicture?: string
   emailContent?: string
-  onUpdate?: (key: string, value: string) => void
+  onUpdate?: (key: keyof GmailConfig, value: string) => void
   onProfilePictureUpload?: (file: File) => void
 }
 
@@ -56,7 +57,7 @@ export function GmailEmail({
 
   const handleContentEdit = (key: string, element: HTMLElement) => {
     const value = element.textContent || ""
-    onUpdate?.(key, value)
+    onUpdate?.(key as keyof GmailConfig, value)
   }
 
   const handleEmailContentEdit = (element: HTMLElement) => {
@@ -65,6 +66,7 @@ export function GmailEmail({
       .replace(/<div>/g, "\n")
       .replace(/<\/div>/g, "")
       .replace(/<br>/g, "\n")
+      .replace(/^\n/, "") // Remove only the leading newline that gets added
     onUpdate?.("emailContent", value)
   }
 
